@@ -2763,10 +2763,13 @@ void STDMETHODCALLTYPE CCryDX12DeviceContext::UpdateSubresource1(
 		assert(subData.pData != nullptr);
 
 		const NCryDX12::NODE64& uploadMasks = resource.GetNodeMasks();
+		auto heapProps = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD, blsi(uploadMasks.creationMask), uploadMasks.creationMask);
+		auto resourceDesc = CD3DX12_RESOURCE_DESC::Buffer(uploadBufferSize);
+
 		if (S_OK != GetDevice()->GetDX12Device()->CreateOrReuseCommittedResource(
-		      &CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD, blsi(uploadMasks.creationMask), uploadMasks.creationMask),
+		      &heapProps,
 		      D3D12_HEAP_FLAG_NONE,
-		      &CD3DX12_RESOURCE_DESC::Buffer(uploadBufferSize),
+		      &resourceDesc,
 		      D3D12_RESOURCE_STATE_GENERIC_READ,
 		      nullptr,
 		      IID_GFX_ARGS(&uploadBuffer)))
