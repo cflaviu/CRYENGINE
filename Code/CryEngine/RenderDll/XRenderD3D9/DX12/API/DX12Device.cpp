@@ -296,10 +296,13 @@ CDevice::CDevice(ID3D12Device* d3d12Device, D3D_FEATURE_LEVEL featureLevel, UINT
 		m_OcclusionHeap.Init(this, desc);
 	}
 
+	auto heapProps = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_READBACK, blsi(m_nodeMask), m_nodeMask);
+	auto resourceDesc = CD3DX12_RESOURCE_DESC::Buffer(sizeof(UINT64) * m_TimestampHeap.GetCapacity());
+
 	if (S_OK != CreateOrReuseCommittedResource(
-				&CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_READBACK, blsi(m_nodeMask), m_nodeMask),
+				&heapProps,
 				D3D12_HEAP_FLAG_NONE,
-				&CD3DX12_RESOURCE_DESC::Buffer(sizeof(UINT64) * m_TimestampHeap.GetCapacity()),
+				&resourceDesc,
 				D3D12_RESOURCE_STATE_COPY_DEST,
 				nullptr,
 				IID_GFX_ARGS(&m_TimestampDownloadBuffer)))
@@ -307,15 +310,20 @@ CDevice::CDevice(ID3D12Device* d3d12Device, D3D_FEATURE_LEVEL featureLevel, UINT
 		DX12_ERROR("Could not create intermediate timestamp download buffer!");
 	}
 
-	if (S_OK != CreateOrReuseCommittedResource(
-				&CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_READBACK, blsi(m_nodeMask), m_nodeMask),
-				D3D12_HEAP_FLAG_NONE,
-				&CD3DX12_RESOURCE_DESC::Buffer(sizeof(UINT64) * m_OcclusionHeap.GetCapacity()),
-				D3D12_RESOURCE_STATE_COPY_DEST,
-				nullptr,
-				IID_GFX_ARGS(&m_OcclusionDownloadBuffer)))
 	{
-		DX12_ERROR("Could not create intermediate occlusion download buffer!");
+		auto heapProps = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_READBACK, blsi(m_nodeMask), m_nodeMask);
+		auto resourceDesc = CD3DX12_RESOURCE_DESC::Buffer(sizeof(UINT64) * m_OcclusionHeap.GetCapacity());
+
+		if (S_OK != CreateOrReuseCommittedResource(
+			&heapProps,
+			D3D12_HEAP_FLAG_NONE,
+			&resourceDesc,
+			D3D12_RESOURCE_STATE_COPY_DEST,
+			nullptr,
+			IID_GFX_ARGS(&m_OcclusionDownloadBuffer)))
+		{
+			DX12_ERROR("Could not create intermediate occlusion download buffer!");
+		}
 	}
 
 	m_TimestampMemory = nullptr;
@@ -841,11 +849,14 @@ HRESULT STDMETHODCALLTYPE CDevice::CreateOrReuseStagingResource(
 	// NOTE: this is a staging resource, no flags permitting views are allowed
 	resourceDesc.Flags = D3D12_RESOURCE_FLAG_DENY_SHADER_RESOURCE;
 
+	auto heapProps = CD3DX12_HEAP_PROPERTIES(heapType, blsi(sHeap.CreationNodeMask), sHeap.CreationNodeMask);
+	auto resourceDesc2 = CD3DX12_RESOURCE_DESC::Buffer(requiredSize);
+
 	ID3D12Resource* stagingResource = NULL;
 	HRESULT result = CreateOrReuseCommittedResource(
-		&CD3DX12_HEAP_PROPERTIES(heapType, blsi(sHeap.CreationNodeMask), sHeap.CreationNodeMask),
+		&heapProps,
 		D3D12_HEAP_FLAG_NONE,
-		&CD3DX12_RESOURCE_DESC::Buffer(requiredSize),
+		&resourceDesc2,
 		initialState,
 		nullptr,
 		IID_GFX_ARGS(&stagingResource));

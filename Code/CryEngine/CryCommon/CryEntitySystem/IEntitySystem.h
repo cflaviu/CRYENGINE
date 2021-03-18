@@ -726,6 +726,8 @@ typedef struct IEntitySystem* (* PFNCREATEENTITYSYSTEM)(ISystem* pISystem);
 	#define ENTITY_EVENT_LISTENER_REMOVED(nEntity, pListener)
 #endif
 
+struct IFlowNodeFactory;
+
 template<class T>
 inline IEntityClass* RegisterEntityClassWithDefaultComponent(
   const char* name,
