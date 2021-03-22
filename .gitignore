@@ -9,12 +9,18 @@
 /.bootstrap*.*
 
 # Temporary files.
-*.log
-*.dmp
-*.pyo
-*.pyc
 *.bak
 *.bak2
+*.bg
+*.dmp
+*.gch
+*.log
+*.o
+*.pch
+*.pyc
+*.pyo
+*.so
+*.user
 error.jpg
 _WAF_/user_settings.options
 
