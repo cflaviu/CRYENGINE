@@ -2,8 +2,8 @@ import qbs 1.0
 
 Project {
     references: [
-        "_TEST_.qbs",
-        "CRYENGINE.qbs",
-        "Projects.qbs",
+        "Code/_TEST_.qbs",
+        "Code/CRYENGINE.qbs",
+        "Code/Projects.qbs",
     ]
 }
