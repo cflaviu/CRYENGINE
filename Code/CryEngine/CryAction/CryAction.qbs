@@ -12,12 +12,12 @@ DynamicLibrary {
         ".",
     ]
     cpp.systemIncludePaths: [
-        "../CryCommon",
-        "../CryCommon/3rdParty",
-        "../CrySchematyc/Core/Interface",
         "../../CryPlugins/CryDefaultEntities/Module",
         "../../SDKs",
         "../../SDKs/boost",
+        "../CryCommon",
+        "../CryCommon/3rdParty",
+        "../CrySchematyc/Core/Interface",
     ]
     cpp.cxxFlags: [
         "-Wunused-parameter",
