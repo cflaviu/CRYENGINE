@@ -11,14 +11,15 @@ DynamicLibrary {
     cpp.includePaths: [
         ".",
     ]
+    // /home/io/Development/CRYENGINE/Code/Sandbox/EditorQt/
     cpp.systemIncludePaths: [
-        "../../SDKs/boost",
-        "../CryAction",
-        "../CryCommon",
-        "../CryCommon/3rdParty",
-        "../CryDefaultEntities/Module",
-        "../CryDefaultEntities/Module/.",
-        "../CrySchematyc/Core/Interface",
+        "../../../SDKs/boost",
+        "../../CryEngine/Core/Interface",
+        "../../CryEngine/CryAction",
+        "../../CryEngine/CryCommon",
+        "../../CryEngine/CryCommon/3rdParty",
+        "../CryPlugins/CryDefaultEntities/Module",
+        "../CryPlugins/CryDefaultEntities/Module/.",
     ]
     cpp.cxxFlags: [
         "-Wunused-parameter",

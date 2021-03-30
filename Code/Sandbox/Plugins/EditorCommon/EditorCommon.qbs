@@ -1,6 +1,6 @@
 import qbs 1.0
 
-CppApplication {
+DynamicLibrary {
     Depends { name: 'cpp' }
     cpp.cxxLanguageVersion: "c++17"
     cpp.enableRtti: false
@@ -12,10 +12,7 @@ CppApplication {
         ".",
     ]
     cpp.systemIncludePaths: [
-        "../../CryEngine\CryCommon",
-        "../../CryEngine\CryCommon\3rdParty",
-        "../../CryEngine\CrySchematyc\Core\Interface",
-        "../../SDKs\boost",
+
     ]
     cpp.cxxFlags: [
         "-Wunused-parameter",
@@ -23,15 +20,11 @@ CppApplication {
     ]
     Group {
         name: "PCH"
-        files: ["StdAfx.h"]
+        files: ["stdafx.h"]
         fileTags: ["cpp_pch_src"]
     }
-    Group {
-        name: "Resource Files"
-    //    files: ["resource.h"]
-    }
-    Group {
-        name: "Source Files"
-        files: ["Main.cpp"]
-    }
+    files: [
+
+    ]
 }
+

@@ -1,0 +1,35 @@
+import qbs 1.0
+
+Project {
+    references: [
+        "3DConnexionPlugin/3DConnexionPlugin.qbs",
+        "CryDesigner/CryDesigner.qbs",
+        "CryTestRunnerPlugin/CryTestRunnerPlugin.qbs",
+        "DependencyGraph/DependencyGraph.qbs",
+        "DialogEditor/DialogEditor.qbs",
+        "EditorAnimation/EditorAnimation.qbs",
+        "EditorAudioControlsEditor/EditorAudioControlsEditor.qbs",
+        "EditorBehaviorTree/EditorBehaviorTree.qbs",
+        "EditorCommon/EditorCommon.qbs",
+        "EditorConsole/EditorConsole.qbs",
+        "EditorCSharp/EditorCSharp.qbs",
+        "EditorDynamicResponseSystem/EditorDynamicResponseSystem.qbs",
+        "EditorEnvironment/EditorEnvironment.qbs",
+        "EditorGameSDK/EditorGameSDK.qbs",
+        "EditorParticle/EditorParticle.qbs",
+        "EditorSchematyc/EditorSchematyc.qbs",
+        "EditorSubstance/EditorSubstance.qbs",
+        "EditorTrackView/EditorTrackView.qbs",
+        "EditorUDR/EditorUDR.qbs",
+        "FacialEditorPlugin/FacialEditorPlugin.qbs",
+        "FBXPlugin/FBXPlugin.qbs",
+        "MaterialEditorPlugin/MaterialEditorPlugin.qbs",
+        "MeshImporter/MeshImporter.qbs",
+        "MFCToolsPlugin/MFCToolsPlugin.qbs",
+        "PrefabAssetType/PrefabAssetType.qbs",
+        "SamplePlugin/SamplePlugin.qbs",
+        "SandboxPythonBridge/SandboxPythonBridge.qbs",
+        "SmartObjectEditor/SmartObjectEditor.qbs",
+        "VehicleEditor/VehicleEditor.qbs",
+    ]
+}

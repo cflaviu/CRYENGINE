@@ -7,6 +7,6 @@ Project {
         "CryPlugins/CryPlugins.qbs",
         "Launcher/Launcher.qbs",
         "Libs/Libs.qbs",
-        "Sandbox/EditorQt/Sandbox.qbs",
+        "Sandbox/Sandbox.qbs",
     ]
 }
